@@ -21,7 +21,7 @@ const slides = [
   },
   {
     id: 2,
-    image: '/images/slide2.jpg',
+    image: '/images/slide2.png',
     title: 'Educación accesible y de calidad',
     text: 'One Four te lleva al siguiente nivel',
     button: {
