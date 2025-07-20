@@ -1,11 +1,16 @@
 import Navbar from '../components/NavBar'
 import Hero from '../components/Hero'
-
-export default function Home() {
+import ClientWrapper from '../components/ClientWrapper'
+import WhyChooseUs from '../components/WhyChooseUs'
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gray-100">
+    <>
       <Navbar />
-      <Hero />
-    </main>
+      <main className="bg-[#0d0d0d] min-h-screen">
+        <Hero />
+        <ClientWrapper />
+          <WhyChooseUs />
+      </main>
+    </>
   )
 }
