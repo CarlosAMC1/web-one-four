@@ -1,50 +1,72 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
-import { FaLaptopCode, FaUserTie, FaGlobe } from 'react-icons/fa'
+import { motion } from 'framer-motion';
+import {
+  FaChalkboardTeacher,
+  FaLaptopCode,
+  FaGlobeAmericas,
+} from 'react-icons/fa';
 
-const beneficios = [
+const benefits = [
   {
-    icon: <FaLaptopCode className="text-accent text-3xl" />,
-    titulo: 'Diplomados 100% prácticos',
-    descripcion: 'Aprende haciendo desde el primer día con proyectos reales.',
+    icon: <FaChalkboardTeacher className="text-4xl text-blue-400" />,
+    title: 'Docentes Expertos',
+    description: 'Aprende con profesionales con experiencia real en su campo.',
   },
   {
-    icon: <FaUserTie className="text-accent text-3xl" />,
-    titulo: 'Enfocados al trabajo',
-    descripcion: 'Diseñados para mejorar tu perfil profesional rápidamente.',
+    icon: <FaLaptopCode className="text-4xl text-blue-400" />,
+    title: 'Diplomados Prácticos',
+    description: 'Formación enfocada en habilidades que el mercado necesita.',
   },
   {
-    icon: <FaGlobe className="text-accent text-3xl" />,
-    titulo: 'Acceso desde cualquier lugar',
-    descripcion: 'Estudia a tu ritmo, desde tu móvil o computadora.',
+    icon: <FaGlobeAmericas className="text-4xl text-blue-400" />,
+    title: 'Acceso 100% Online',
+    description: 'Estudia desde cualquier lugar con nuestra plataforma virtual.',
   },
-]
+];
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.2, duration: 0.6, ease: 'easeOut' },
+  }),
+};
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-[1400px] mx-auto">
-  <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-12 text-center leading-snug">
-    ¿Por qué elegir <span className="text-accent">ONE FOUR</span>?
-  </h2>
+    <section
+      className="bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900 py-20 px-6 md:px-12 transition-colors duration-300"
+      id="beneficios"
+    >
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black dark:text-white">
+          ¿Por qué elegir <span className="text-blue-500 dark:text-blue-400">ONE FOUR</span>?
+        </h2>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
-    {beneficios.map((item, i) => (
-      <motion.div
-        key={i}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: i * 0.2, duration: 0.5 }}
-        viewport={{ once: true }}
-        className="bg-[#1a1a1a] p-6 sm:p-7 rounded-xl border border-[#333] hover:border-accent hover:scale-[1.03] transition-all duration-300"
-      >
-        <div className="mb-4">{item.icon}</div>
-        <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{item.titulo}</h3>
-        <p className="text-sm text-secondary">{item.descripcion}</p>
-      </motion.div>
-    ))}
-  </div>
-</section>
-
-  )
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
+          {benefits.map((item, index) => (
+            <motion.div
+              key={index}
+              className="bg-gray-100 dark:bg-gray-800/70 border border-blue-500/20 dark:border-blue-500/30 rounded-2xl p-8 shadow-lg hover:shadow-blue-500/40 transition-all duration-300 backdrop-blur"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              custom={index}
+              variants={cardVariants}
+            >
+              <div className="mb-4 flex justify-center">{item.icon}</div>
+              <h3 className="text-xl font-semibold mb-2 text-black dark:text-white">
+                {item.title}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-300">
+                {item.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
