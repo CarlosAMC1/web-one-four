@@ -38,19 +38,19 @@ export default function Navbar() {
         className="hidden md:flex items-center gap-6"
       >
         <Link
-          href="#"
+          href="/"
           className="text-sm font-medium text-gray-700 hover:text-black transition dark:text-secondary dark:hover:text-white"
         >
           Inicio
         </Link>
         <Link
-          href="#"
+          href="#diplomados"
           className="text-sm font-medium text-gray-700 hover:text-black transition dark:text-secondary dark:hover:text-white"
         >
           Diplomados
         </Link>
         <Link
-          href="#"
+          href="#beneficios"
           className="text-sm font-medium text-gray-700 hover:text-black transition dark:text-secondary dark:hover:text-white"
         >
           Nosotros

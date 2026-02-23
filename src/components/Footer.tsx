@@ -16,9 +16,9 @@ export default function Footer() {
 
         {/* Enlaces institucionales */}
         <ul className="flex flex-wrap items-center gap-6 text-sm font-medium">
-          <li><Link href="/terminos" className="hover:underline">Términos y condiciones</Link></li>
-          <li><Link href="/privacidad" className="hover:underline">Política de privacidad</Link></li>
-          <li><Link href="/nosotros" className="hover:underline">Sobre nosotros</Link></li>
+          <li><Link href="#beneficios" className="hover:underline">Sobre nosotros</Link></li>
+          <li><Link href="#contacto" className="hover:underline">Contacto</Link></li>
+          <li><Link href="#diplomados" className="hover:underline">Diplomados</Link></li>
         </ul>
 
         {/* Redes */}
