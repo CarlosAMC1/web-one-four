@@ -75,7 +75,7 @@ export default function WhyChooseUs() {
               </div>
               <h3 className="text-xl font-bold mb-4">{benefit.title}</h3>
               <p className="text-gray-400 leading-relaxed font-light">
-                {benefit.benefit_desc || benefit.description}
+                {benefit.description}
               </p>
             </motion.div>
           ))}
