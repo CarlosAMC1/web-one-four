@@ -1,154 +1,123 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronRight, ChevronLeft, Sparkles, GraduationCap, Briefcase, Heart } from 'lucide-react';
+import Link from 'next/link';
 
 const slides = [
   {
-    type: 'image-full',
-    src: '/slide1.png',
-    alt: 'Slide 1',
-    title: 'Conecta con tu futuro',
-    description: 'Diplomados virtuales para transformar tu vida.',
-    button: {
-      text: 'Ver Diplomados',
-      href: '#diplomados',
-    },
+    title: "Lidera la Era",
+    subtitle: "Digital",
+    description: "Diplomados de alta especialización en tecnología y gestión, diseñados para los líderes del mañana.",
+    gradient: "from-blue-600 to-indigo-700",
+    icon: <Sparkles className="w-12 h-12 text-blue-400" />,
   },
   {
-    type: 'split',
-    src: '/slide2-layout-split.png',
-    alt: 'Slide 2',
-    title: 'Estudia desde cualquier lugar',
-    description: 'Nuestros programas se adaptan a tu ritmo y estilo de vida.',
-    button: {
-      text: 'Postúlate ahora',
-      href: '#admision',
-    },
+    title: "Excelencia",
+    subtitle: "Contable",
+    description: "Domina las finanzas y la contabilidad con herramientas modernas y casos prácticos reales.",
+    gradient: "from-emerald-600 to-teal-700",
+    icon: <Briefcase className="w-12 h-12 text-emerald-400" />,
   },
   {
-    type: 'video',
-    src: '/videos/hero.mp4',
-    title: 'Vive la experiencia ONE FOUR',
-    description: 'Descubre cómo es estudiar con nosotros.',
-    button: {
-      text: 'Explora más',
-      href: '#nosotros',
-    },
-  },
+    title: "Habilidades",
+    subtitle: "Premium",
+    description: "Soft skills e inteligencia emocional para destacar en cualquier entorno profesional competitivo.",
+    gradient: "from-purple-600 to-pink-700",
+    icon: <Heart className="w-12 h-12 text-purple-400" />,
+  }
 ];
 
 export default function HeroSlider() {
-  const [index, setIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % slides.length);
-    }, 7000);
-    return () => clearInterval(interval);
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 8000);
+    return () => clearInterval(timer);
   }, []);
 
-  const nextSlide = () => setIndex((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  const next = () => setCurrent((prev) => (prev + 1) % slides.length);
+  const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
-    <div className="relative w-full h-[90vh] overflow-hidden bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
-      {slides.map((slide, i) => (
-        <div
-          key={i}
-          className={`absolute top-0 left-0 w-full h-full transition-opacity duration-700 ease-in-out ${
-            i === index ? 'opacity-100 z-10' : 'opacity-0 z-0'
-          }`}
-        >
-          {/* Slide tipo 1 */}
-          {slide.type === 'image-full' && (
-            <div className="w-full h-full relative">
-              <Image src={slide.src} alt={slide.alt} layout="fill" objectFit="cover" />
-              <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center px-6">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">{slide.title}</h2>
-                <p className="text-white/90 max-w-xl mb-6">{slide.description}</p>
-                <a
-                  href={slide.button.href}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-full shadow-lg transition"
-                >
-                  {slide.button.text}
-                </a>
-              </div>
-            </div>
-          )}
+    <section className="relative h-[95vh] w-full overflow-hidden bg-[#050505] flex items-center justify-center">
+      {/* Background Gradients */}
+      <AnimatePresence mode='wait'>
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 0.15, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className={`absolute inset-0 bg-gradient-to-br ${slides[current].gradient} blur-[120px]`}
+        />
+      </AnimatePresence>
 
-          {/* Slide tipo 2 */}
-          {slide.type === 'split' && (
-            <div className="flex flex-col md:flex-row w-full h-full">
-              <div className="relative w-full md:w-1/2 h-[50vh] md:h-full">
-                <Image src={slide.src} alt={slide.alt} layout="fill" objectFit="cover" />
-              </div>
-              <div className="flex flex-col justify-center px-8 py-10 w-full md:w-1/2 bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">{slide.title}</h2>
-                <p className="text-gray-800 dark:text-white/80 mb-6">{slide.description}</p>
-                <a
-                  href={slide.button.href}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-full transition w-fit"
-                >
-                  {slide.button.text}
-                </a>
-              </div>
-            </div>
-          )}
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
-          {/* Slide tipo 3 */}
-          {slide.type === 'video' && (
-            <div className="w-full h-full relative">
-              <video
-                src={slide.src}
-                autoPlay
-                muted
-                loop
-                className="object-cover w-full h-full"
-              />
-              <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center px-6">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">{slide.title}</h2>
-                <p className="text-white/90 max-w-xl mb-6">{slide.description}</p>
-                <a
-                  href={slide.button.href}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-full transition"
-                >
-                  {slide.button.text}
-                </a>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="max-w-4xl mx-auto text-center">
+          <AnimatePresence mode='wait'>
+            <motion.div
+              key={current}
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -40, opacity: 0 }}
+              transition={{ duration: 0.8, ease: "circOut" }}
+              className="space-y-6"
+            >
+              <div className="flex justify-center mb-4">
+                {slides[current].icon}
               </div>
-            </div>
-          )}
+
+              <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-tight text-white">
+                {slides[current].title} <br />
+                <span className="text-gradient uppercase">{slides[current].subtitle}</span>
+              </h1>
+
+              <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto font-light leading-relaxed">
+                {slides[current].description}
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+                <Link href="#diplomados" className="btn-primary text-lg">
+                  Explorar Programas
+                </Link>
+                <Link href="#beneficios" className="glass-card px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all text-white">
+                  Saber Más
+                </Link>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
-      ))}
+      </div>
 
-      {/* Dots */}
-      <div className="absolute bottom-6 w-full flex justify-center gap-2 z-20">
+      {/* Pagination */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
         {slides.map((_, i) => (
           <button
             key={i}
-            onClick={() => setIndex(i)}
-            className={`w-3 h-3 rounded-full transition ${
-              i === index
-                ? 'bg-black dark:bg-white'
-                : 'bg-black/30 dark:bg-white/50'
-            }`}
+            onClick={() => setCurrent(i)}
+            className={`h-1 transition-all duration-500 rounded-full ${i === current ? 'w-12 bg-blue-500' : 'w-4 bg-gray-700'}`}
           />
         ))}
       </div>
 
-      {/* Controles izquierda y derecha */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 dark:bg-black/40 hover:bg-white/50 dark:hover:bg-black/70 text-black dark:text-white text-2xl px-3 py-1 rounded-full z-20 transition"
-      >
-        ‹
+      {/* Navigation Arrows */}
+      <button onClick={prev} className="absolute left-8 top-1/2 -translate-y-1/2 p-4 text-white/20 hover:text-white transition-colors hidden md:block">
+        <ChevronLeft className="w-10 h-10" />
       </button>
-      <button
-        onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 dark:bg-black/40 hover:bg-white/50 dark:hover:bg-black/70 text-black dark:text-white text-2xl px-3 py-1 rounded-full z-20 transition"
-      >
-        ›
+      <button onClick={next} className="absolute right-8 top-1/2 -translate-y-1/2 p-4 text-white/20 hover:text-white transition-colors hidden md:block">
+        <ChevronRight className="w-10 h-10" />
       </button>
-    </div>
+
+      {/* Hero Bottom Fade */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] to-transparent"></div>
+    </section>
   );
 }

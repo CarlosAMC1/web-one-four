@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prisma/client": "^7.4.1",
+    "@supabase/supabase-js": "^2.97.0",
     "autoprefixer": "^10.4.14",
     "framer-motion": "^12.23.6",
     "lucide-react": "^0.525.0",
@@ -21,8 +23,10 @@
     "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
-    "@types/node": "24.0.15",
+    "@types/node": "^24.0.15",
     "@types/react": "19.1.8",
-    "typescript": "5.8.3"
+    "prisma": "^7.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }

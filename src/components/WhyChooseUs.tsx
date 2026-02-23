@@ -1,65 +1,90 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { FaChalkboardTeacher, FaLaptopCode, FaGlobeAmericas } from 'react-icons/fa';
+import { ShieldCheck, Zap, Globe, Users, Award, BookOpen } from 'lucide-react';
 
 const benefits = [
   {
-    icon: <FaChalkboardTeacher className="text-4xl text-blue-400" />,
-    title: 'Docentes Expertos',
-    description: 'Aprende con profesionales con experiencia real en su campo.',
+    icon: <Award className="w-8 h-8 text-blue-500" />,
+    title: 'Certificación Oficial',
+    description: 'Nuestros diplomados cuentan con el respaldo institucional necesario para potenciar tu CV.',
   },
   {
-    icon: <FaLaptopCode className="text-4xl text-blue-400" />,
-    title: 'Diplomados Prácticos',
-    description: 'Formación enfocada en habilidades que el mercado necesita.',
+    icon: <Zap className="w-8 h-8 text-blue-500" />,
+    title: 'Aprendizaje Acelerado',
+    description: 'Metodología enfocada en la práctica que te permite aplicar lo aprendido desde el primer día.',
   },
   {
-    icon: <FaGlobeAmericas className="text-4xl text-blue-400" />,
-    title: 'Acceso 100% Online',
-    description: 'Estudia desde cualquier lugar con nuestra plataforma virtual.',
+    icon: <Globe className="w-8 h-8 text-blue-500" />,
+    title: 'Acceso Global',
+    description: 'Estudia a tu ritmo desde cualquier lugar del mundo con nuestra plataforma 24/7.',
+  },
+  {
+    icon: <Users className="w-8 h-8 text-blue-500" />,
+    title: 'Mentoría Especializada',
+    description: 'Acompañamiento constante de profesionales expertos que guiarán tu proceso educativo.',
+  },
+  {
+    icon: <ShieldCheck className="w-8 h-8 text-blue-500" />,
+    title: 'Calidad Garantizada',
+    description: 'Contenidos actualizados constantemente siguiendo las últimas tendencias del mercado.',
+  },
+  {
+    icon: <BookOpen className="w-8 h-8 text-blue-500" />,
+    title: 'Recursos Exclusivos',
+    description: 'Accede a materiales, bibliotecas y herramientas premium solo para nuestros estudiantes.',
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-gradient-to-b from-white to-gray-100 dark:from-black dark:to-gray-900 py-20 px-6 md:px-12 transition-colors duration-300" id="beneficios">
-      <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-black dark:text-white">
-          ¿Por qué elegir <span className="text-blue-500 dark:text-blue-400">ONE FOUR</span>?
-        </h2>
+    <section className="py-24 bg-[#050505] relative overflow-hidden" id="beneficios">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black tracking-tight mb-6"
+          >
+            ¿Por qué <span className="text-gradient">ONE FOUR</span>?
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-gray-400 text-lg"
+          >
+            Elevamos el estándar de la educación virtual con un enfoque premium y resultados tangibles.
+          </motion.p>
+        </div>
 
-        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
-          {benefits.map((item, index) => (
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="bg-gray-100 dark:bg-gray-800/70 border border-blue-500/20 dark:border-blue-500/30 rounded-2xl p-8 shadow-lg hover:shadow-blue-500/40 transition-all duration-300 backdrop-blur"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.3 }}
-              custom={index}
-              variants={{
-                hidden: { opacity: 0, y: 40 },
-                show: (i: number) => ({
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    delay: i * 0.2,
-                    duration: 0.6,
-                    ease: [0.42, 0, 0.58, 1],
-                  },
-                }),
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="glass-card p-8 rounded-3xl hover-lift group"
             >
-              <div className="mb-4 flex justify-center">{item.icon}</div>
-              <h3 className="text-xl font-semibold mb-2 text-black dark:text-white">
-                {item.title}
-              </h3>
-              <p className="text-gray-700 dark:text-gray-300">{item.description}</p>
+              <div className="bg-blue-600/10 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                {benefit.icon}
+              </div>
+              <h3 className="text-xl font-bold mb-4">{benefit.title}</h3>
+              <p className="text-gray-400 leading-relaxed font-light">
+                {benefit.benefit_desc || benefit.description}
+              </p>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {/* Decorative Orbs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2"></div>
     </section>
   );
 }

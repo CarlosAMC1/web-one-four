@@ -1,50 +1,117 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { ChevronRight, Clock, Users, Star } from 'lucide-react';
 
 const diplomados = [
   {
-    id: 1,
+    slug: 'desarrollo-web-fullstack',
     titulo: 'Desarrollo Web Fullstack',
-    descripcion: 'Aprende HTML, CSS, JavaScript, React y Node.js desde cero.',
+    descripcion: 'Domina Next.js, TypeScript y Supabase para crear aplicaciones modernas de alto impacto.',
+    nivel: 'Intermedio',
+    alumnos: '1.2k+',
+    clases: '40+',
+    color: 'from-blue-500/20 to-cyan-500/20',
   },
   {
-    id: 2,
+    slug: 'contabilidad-pymes',
     titulo: 'Contabilidad para PYMES',
-    descripcion: 'Domina registros contables, balances y software contable moderno.',
+    descripcion: 'Gestión financiera estratégica y herramientas digitales para el éxito empresarial moderno.',
+    nivel: 'Básico a Pro',
+    alumnos: '800+',
+    clases: '32+',
+    color: 'from-emerald-500/20 to-teal-500/20',
   },
   {
-    id: 3,
-    titulo: 'Liderazgo y Habilidades Blandas',
-    descripcion: 'Mejora comunicación, trabajo en equipo e inteligencia emocional.',
+    slug: 'habilidades-blandas',
+    titulo: 'Liderazgo & Inteligencia Emocional',
+    descripcion: 'Desarrolla las cualidades humanas que te diferenciarán en un mundo dominado por la IA.',
+    nivel: 'Varios',
+    alumnos: '2.5k+',
+    clases: '24+',
+    color: 'from-purple-500/20 to-pink-500/20',
   },
 ];
 
 export default function DiplomadosDestacados() {
   return (
-    <section className="bg-white text-black dark:bg-background dark:text-white transition-colors duration-300 py-16 px-6">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-        Diplomados Destacados
-      </h2>
-
-      <div className="grid md:grid-cols-3 gap-8">
-        {diplomados.map((diplomado, index) => (
-          <motion.div
-            key={diplomado.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.2, duration: 0.6 }}
-            viewport={{ once: true }}
-            className="bg-gray-100 dark:bg-[#1f1f1f] p-6 rounded-xl border border-gray-300 dark:border-[#333] hover:scale-[1.02] hover:border-blue-600 transition-all duration-300 shadow-md"
-          >
-            <h3 className="text-xl font-semibold mb-3">
-              {diplomado.titulo}
-            </h3>
-            <p className="text-sm text-gray-700 dark:text-secondary">
-              {diplomado.descripcion}
+    <section className="bg-[#0a0a0a] py-32 px-6" id="diplomados">
+      <div className="container mx-auto">
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl">
+            <motion.h2
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-6xl font-black tracking-tighter mb-4"
+            >
+              Nuestros <span className="text-gradient">DIPLOMADOS</span>
+            </motion.h2>
+            <p className="text-gray-400 text-lg">
+              Programas diseñados por expertos de la industria para garantizar tu éxito profesional.
             </p>
-          </motion.div>
-        ))}
+          </div>
+          <Link href="/Campus" className="text-blue-500 font-bold flex items-center gap-2 hover:underline">
+            Ver catálogo completo <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8">
+          {diplomados.map((diplomado, index) => (
+            <motion.div
+              key={diplomado.slug}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="group relative"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${diplomado.color} rounded-[2rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+
+              <div className="glass-card p-8 rounded-[2rem] h-full flex flex-col relative z-10 hover:border-blue-500/50 transition-colors">
+                <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center gap-1 text-yellow-500">
+                    <Star className="w-4 h-4 fill-current" />
+                    <Star className="w-4 h-4 fill-current" />
+                    <Star className="w-4 h-4 fill-current" />
+                    <Star className="w-4 h-4 fill-current" />
+                    <Star className="w-4 h-4 fill-current" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-blue-500 bg-blue-500/10 px-3 py-1 rounded-full">
+                    {diplomado.nivel}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-black mb-4 leading-tight group-hover:text-blue-400 transition-colors">
+                  {diplomado.titulo}
+                </h3>
+
+                <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
+                  {diplomado.descripcion}
+                </p>
+
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  <div className="flex items-center gap-2 text-gray-500 text-xs font-medium">
+                    <Clock className="w-4 h-4" />
+                    <span>{diplomado.clases} Clases</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-500 text-xs font-medium">
+                    <Users className="w-4 h-4" />
+                    <span>{diplomado.alumnos} Estudiantes</span>
+                  </div>
+                </div>
+
+                <Link
+                  href={`/cursos/${diplomado.slug}`}
+                  className="w-full bg-white text-black py-4 rounded-2xl font-black flex items-center justify-center gap-2 group-hover:bg-blue-600 group-hover:text-white transition-all transform active:scale-95"
+                >
+                  Ver Detalles <ChevronRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -2,59 +2,70 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 
 const faqs = [
   {
     pregunta: '¿Cuánto dura cada diplomado?',
-    respuesta: 'Nuestros diplomados tienen una duración promedio de 2 a 4 meses, dependiendo del contenido y modalidad.',
+    respuesta: 'Nuestros diplomados tienen una duración promedio de 2 a 6 meses, dependiendo de la especialidad y el ritmo del estudiante.',
   },
   {
     pregunta: '¿Las clases son en vivo o grabadas?',
-    respuesta: 'Contamos con clases grabadas que puedes ver a tu ritmo, y sesiones en vivo opcionales para resolver dudas.',
+    respuesta: 'Combinamos lo mejor de ambos mundos: clases grabadas de alta calidad disponibles 24/7 y sesiones en vivo semanales para resolución de dudas complejas.',
   },
   {
-    pregunta: '¿Otorgan certificado?',
-    respuesta: 'Sí. Al finalizar y aprobar tu diplomado, obtendrás un certificado digital con valor profesional.',
+    pregunta: '¿El certificado tiene validez internacional?',
+    respuesta: 'Sí. Nuestros certificados digitales cuentan con respaldo institucional y códigos de verificación QR con validez en toda Latinoamérica.',
+  },
+  {
+    pregunta: '¿Necesito experiencia previa?',
+    respuesta: 'Depende del diplomado. Tenemos niveles desde "Básico" hasta "Avanzado". En la página de cada curso encontrarás los requisitos específicos.',
   },
 ];
 
 export default function Faqs() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const toggle = (i: number) => {
-    setActiveIndex((prev) => (prev === i ? null : i));
-  };
-
   return (
-    <section className="bg-white dark:bg-background text-black dark:text-white py-20 px-6 md:px-12 transition-colors duration-300" id="faqs">
-      <div className="max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          Preguntas frecuentes
-        </h2>
+    <section className="py-24 bg-[#050505] px-6" id="faqs">
+      <div className="container mx-auto max-w-4xl">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-block p-3 bg-blue-600/10 rounded-2xl mb-4"
+          >
+            <HelpCircle className="w-8 h-8 text-blue-500" />
+          </motion.div>
+          <h2 className="text-4xl md:text-5xl font-black mb-4">Preguntas <span className="text-gradient uppercase">FRECUENTES</span></h2>
+          <p className="text-gray-400">Resolvemos tus dudas para que des el paso hoy mismo.</p>
+        </div>
 
         <div className="space-y-4">
           {faqs.map((item, i) => (
-            <div key={i} className="border border-gray-300 dark:border-gray-600 rounded-xl overflow-hidden">
+            <div key={i} className="glass-card rounded-[2rem] overflow-hidden border-white/5">
               <button
-                onClick={() => toggle(i)}
-                className="w-full flex justify-between items-center text-left p-5 bg-gray-100 dark:bg-[#1f1f1f] hover:bg-gray-200 dark:hover:bg-[#2a2a2a] transition"
+                onClick={() => setActiveIndex(activeIndex === i ? null : i)}
+                className="w-full flex justify-between items-center text-left p-8 hover:bg-white/5 transition-colors"
               >
-                <span className="font-medium text-lg">{item.pregunta}</span>
-                <ChevronDown className={`w-5 h-5 transition-transform ${activeIndex === i ? 'rotate-180' : ''}`} />
+                <span className="font-bold text-lg md:text-xl pr-8">{item.pregunta}</span>
+                <div className={`p-2 rounded-full bg-blue-600/10 transition-transform duration-300 ${activeIndex === i ? 'rotate-180 bg-blue-600 text-white' : 'text-blue-500'}`}>
+                  <ChevronDown className="w-5 h-5" />
+                </div>
               </button>
 
-              <AnimatePresence initial={false}>
+              <AnimatePresence>
                 {activeIndex === i && (
                   <motion.div
-                    key="content"
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: 'auto', opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="px-5 pb-5 text-gray-700 dark:text-gray-300 text-sm"
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
                   >
-                    {item.respuesta}
+                    <div className="px-8 pb-8 text-gray-400 text-lg font-light leading-relaxed border-t border-white/5 pt-4">
+                      {item.respuesta}
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
